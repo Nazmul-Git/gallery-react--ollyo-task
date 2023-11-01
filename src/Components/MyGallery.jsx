@@ -7,18 +7,16 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 const MyGallery = ({ image, returnChecked, index }) => {
     const [haveClass, setHaveClass] = useState(true);
     const { id, img } = image;
-    // console.log(id,img,index);
 
+    // Manage visibility of checkbox
     const handleMark = () => {
         setHaveClass(!haveClass);
     };
 
+    // checkbox provide a id & pass this id with props function parameter
     const handleChecked = (id) => {
-        // console.log('checked', id);
         returnChecked(id);
     };
-
-
 
     return (
         <Droppable droppableId={index + ''}>
@@ -32,7 +30,7 @@ const MyGallery = ({ image, returnChecked, index }) => {
                                     (drag) => (
                                         <div {...drag.draggableProps} {...drag.dragHandleProps} ref={drag.innerRef}>
                                             <img onMouseOver={handleMark} src={img}
-                                            >
+                                            className=''>
                                             </img>
                                         </div>
                                     )

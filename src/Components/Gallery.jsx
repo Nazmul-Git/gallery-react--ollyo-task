@@ -35,51 +35,51 @@ const Gallery = () => {
     const [totalCheck, setTotalChecked] = useState(0);
     const [deleted, setDeleted] = useState(false);
 
+    // collection of selected image
     const returnChecked = (id) => {
         const match = imgArr.find(img => img.id === id);
-        // console.log(match);
+
         if (!match.check) {
             match.check = true;
         } else if (match.check) {
             match.check = false;
         }
-        // console.log(match);
+
         const have = imgArr.filter(img => img.check === true);
-        // console.log(have);
         setTotalChecked(have.length);
     };
 
     // delete image
     const deleteChecked = () => {
         const rest = imgArr.filter(img => img.check !== true);
-        //    console.log(rest);
         setImgArr(rest);
         setDeleted(true);
-        //    console.log(imgArr);
     };
 
     // swapping algorithm
     const handleSwapping=(result)=>{
-        // console.log(result);
         const {source, destination}=result;
-        // console.log(source,destination);
         const copy=[...imgArr];
         const stored=copy[source.index];
         copy[source.index]=copy[destination.index];
         copy[destination.index]=stored;
         setImgArr(copy);
-        console.log(copy);
     }
 
 
     return (
         <DragDropContext onDragEnd={handleSwapping}>
-            <section className=' shadow-md shadow-black'>
-                <div>
+            <section className=' shadow-md shadow-black m-4'>
+                <div className='p-4'>
                     {
-                        totalCheck === 0 ? <h3 className='m-4 font-extrabold'>Gallery</h3> : <div className='flex justify-between m-4'>
-                            <p className={`font-extrabold ${deleted ? 'hidden' : ''}`}>{totalCheck} file selected.</p>
-                            <button onClick={deleteChecked} className='text-red-700 font-extrabold underline'>Delete File</button>
+                        totalCheck === 0 ? <h3 className=' font-extrabold'>Gallery</h3> : <div className='flex justify-between m-4'>
+                            <div className='font-extrabold'>
+                                {
+                                    deleted ? <p>{totalCheck} file deleted</p> :
+                                    <p>{totalCheck} file selected</p>
+                                }
+                            </div>
+                            <button onClick={deleteChecked} className='text-red-500 font-extrabold underline'>Delete File</button>
                         </div>
                     }
 
