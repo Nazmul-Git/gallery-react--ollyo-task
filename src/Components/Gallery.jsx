@@ -55,6 +55,10 @@ const Gallery = () => {
         const rest = imgArr.filter(img => img.check !== true);
         setImgArr(rest);
         setDeleted(true);
+        setTimeout(()=>{
+            setDeleted(false);
+            setTotalChecked(0);
+        },2000);
     };
 
     // swapping algorithm
@@ -76,7 +80,7 @@ const Gallery = () => {
                         totalCheck === 0 ? <h3 className=' font-extrabold'>Gallery</h3> : <div className='flex justify-between m-4'>
                             <div className='font-extrabold'>
                                 {
-                                    deleted ? <p>{totalCheck} file deleted</p> :
+                                    deleted ? <p>{totalCheck} file deleted !</p> :
                                         <p>{totalCheck} file selected</p>
                                 }
                             </div>
