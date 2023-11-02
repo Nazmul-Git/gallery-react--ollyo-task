@@ -12,6 +12,7 @@ import img8 from '../images/image-8.webp';
 import img9 from '../images/image-9.webp';
 import img10 from '../images/image-10.jpeg'
 import { DragDropContext } from 'react-beautiful-dnd';
+import { FcGallery } from 'react-icons/fc';
 
 import MyGallery from './MyGallery';
 
@@ -29,7 +30,7 @@ const Gallery = () => {
         { id: '8', img: img8, check: false },
         { id: '9', img: img9, check: false },
         { id: '10', img: img10, check: false },
-        
+
     ]);
 
     const [totalCheck, setTotalChecked] = useState(0);
@@ -57,15 +58,15 @@ const Gallery = () => {
     };
 
     // swapping algorithm
-    const handleSwapping=(result)=>{
-        const {source, destination}=result;
-        const copy=[...imgArr];
-        const stored=copy[source.index];
-        copy[source.index]=copy[destination.index];
-        copy[destination.index]=stored;
+    const handleSwapping = (result) => {
+        const { source, destination } = result;
+        const copy = [...imgArr];
+        const stored = copy[source.index];
+        copy[source.index] = copy[destination.index];
+        copy[destination.index] = stored;
         setImgArr(copy);
+        // console.log(copy);
     }
-
 
     return (
         <DragDropContext onDragEnd={handleSwapping}>
@@ -76,7 +77,7 @@ const Gallery = () => {
                             <div className='font-extrabold'>
                                 {
                                     deleted ? <p>{totalCheck} file deleted</p> :
-                                    <p>{totalCheck} file selected</p>
+                                        <p>{totalCheck} file selected</p>
                                 }
                             </div>
                             <button onClick={deleteChecked} className='text-red-500 font-extrabold underline'>Delete File</button>
@@ -92,7 +93,12 @@ const Gallery = () => {
                             returnChecked={returnChecked}
                         ></MyGallery>)
                     }
+                    <div className=' rounded-md border-2 border-black border-dashed flex justify-center items-center sm:p-4 md:p-8 lg:p-12'>
+                        <button className='font-bold text-lg'><FcGallery className='h-8 w-8 ml-7'></FcGallery>Add Image</button>
+                    </div>
+
                 </div>
+
             </section>
         </DragDropContext>
     );
